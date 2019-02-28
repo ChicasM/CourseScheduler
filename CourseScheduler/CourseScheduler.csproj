@@ -139,10 +139,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CourseScheduler.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="CourseScheduler_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>CourseScheduler.mdf</DependentUpon>
     </Content>
   </ItemGroup>
