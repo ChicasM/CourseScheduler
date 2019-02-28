@@ -5,8 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:CourseScheduler"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="1000" Width="1800">
     <Grid>
-        
+        <TabControl HorizontalAlignment="Left" Height="949" Margin="10,10,0,0" VerticalAlignment="Top" Width="1772" TabStripPlacement="Left">
+            <TabItem Header="Home
+" Height="30" Width="115">
+                <Grid Background="#FFE5E5E5">
+                    <Label Content="Operator's Manual" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,36,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="897" Width="1629">
+                        The "Home" Tab displays basic user functionality and how to help documentation.<LineBreak/>
+                        The "Administrator View" Tab displays tables and the ability to manually Create Update and Delete records in the database.<LineBreak/>
+                        ____This can disrupt the natural flow of the application so use with caution.<LineBreak/>
+                        ____If normal work flow is disrupted, you can recreate the database from the "Load CSV" tab.<LineBreak/>
+                        The "Load CSV" tab loads a file provided by the University that will fill the database.<LineBreak/>
+                        The "Reports" tab provides a space to generate reports.<LineBreak/><LineBreak/><LineBreak/>
+                        DEVELOPER NOTES: remove when pushing to release.<LineBreak/>
+                        Further tabs can be added if needed.<LineBreak/>
+                        Copy the TabItem tab and then change the Header property.
+                    </TextBlock>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Administrator View" Height="30" Width="115">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Load CSV" Height="30" Width="115">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Reports" Height="30" Width="115">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="TabItem" Height="30" Width="115">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+
     </Grid>
 </Window>
