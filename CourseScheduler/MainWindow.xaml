@@ -54,7 +54,11 @@
         </Grid>
       </TabItem>
       <TabItem Header="Load CSV" Height="30" Width="115">
-        <Grid Background="#FFE5E5E5"/>
+        <Grid Background="#FFE5E5E5">
+          <Button Content="Load File" HorizontalAlignment="Left" Margin="12,30,0,0" VerticalAlignment="Top" Width="159" Click="Button_Click"/>
+          <Label Name ="courses" Content="File Location"  HorizontalAlignment="Left" Margin="207,24,0,0" VerticalAlignment="Top" Width="448" Foreground="#FF9B9292"/>
+          <Label Name ="courses_Loaded" Content="Done"  HorizontalAlignment="Left" Margin="171,50,0,0" VerticalAlignment="Top" Width="448" Foreground="Black" Visibility ="hidden"/>
+        </Grid>
       </TabItem>
       <TabItem Header="Reports" Height="30" Width="115">
         <Grid Background="#FFE5E5E5"/>

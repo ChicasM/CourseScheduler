@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -93,6 +94,75 @@ namespace CourseScheduler
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            courses.Content = "File Location";
+            courses_Loaded.Visibility = Visibility.Hidden;
+
+            string courseLocation = Load_CSV();
+
+            courses.Content = courseLocation;
+            if (courses.Content.ToString() != "File Location")
+            {
+                courses_Loaded.Visibility = Visibility.Visible;
+            }
+        }
+
+        public string Load_CSV()
+        {
+            // Create OpenFileDialog 
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+
+
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".csv";
+            dlg.Filter = "CSV Files (*.csv)|*.csv";
+
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                string filename = dlg.FileName;
+                return filename;
+            }
+            return "File Location";
+        }
+
+        public void Read_CSV(string fileLocation)
+        {
+            using (var reader = new StreamReader(fileLocation))
+            {
+                while (!reader.EndOfStream)
+                {
+                    var line = reader.ReadLine();
+                    var values = line.Split(',');
+
+                    //Add File To DataBase
+                    if (fileLocation.Contains("Courses")){
+                        //DataSet.Courses.AddCoursesRow(//Data)
+                        
+                    }
+                    if (fileLocation.Contains("Teachers"))
+                    {
+
+                    }
+                    if (fileLocation.Contains("Students"))
+                    {
+
+                    }
+
+                    //Works uncomment when done
+                    //TableAdapterManager.UpdateAll(DataSet);
+                }
             }
         }
     }
