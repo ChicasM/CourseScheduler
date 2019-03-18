@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -95,5 +96,90 @@ namespace CourseScheduler
                 MessageBox.Show(ex.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            courses.Content = "File Location";
+            courses_Loaded.Visibility = Visibility.Hidden;
+
+            string courseLocation = Load_CSV();
+
+            courses.Content = courseLocation;
+
+            if (courses.Content.ToString() != "File Location")
+            {
+                courses_Loaded.Visibility = Visibility.Visible;
+            }
+        }
+
+        public string Load_CSV()
+        {
+            // Create OpenFileDialog 
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+
+
+
+            // Set filter for file extension and default file extension 
+            dlg.DefaultExt = ".csv";
+            dlg.Filter = "CSV Files (*.csv)|*.csv";
+
+
+            // Display OpenFileDialog by calling ShowDialog method 
+            Nullable<bool> result = dlg.ShowDialog();
+
+
+            // Get the selected file name and display in a TextBox 
+            if (result == true)
+            {
+                // Open document 
+                string filename = dlg.FileName;
+                Read_CSV(filename);
+                return filename;
+            }
+            return "File Location";
+        }
+
+        public void Read_CSV(string fileLocation)
+        {
+            using (var reader = new StreamReader(fileLocation))
+            {            
+
+                    //Add File To DataBase
+                    if (fileLocation.Contains("Courses")){
+                    while (!reader.EndOfStream)
+                        {
+                            var line = reader.ReadLine();
+                            var values = line.Split(',');
+                            DataSet.Courses.AddCoursesRow(Convert.ToInt32(values[0]), values[1], Convert.ToInt32(values[2]),
+                                Convert.ToBoolean(Convert.ToInt32(values[3])), Convert.ToBoolean(Convert.ToInt32(values[4])), Convert.ToBoolean(Convert.ToInt32(values[5])),
+                                Convert.ToBoolean(Convert.ToInt32(values[6])), values[7], Convert.ToInt32(values[8]));
+                        }
+                    }
+                    if (fileLocation.Contains("Instructors"))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        var line = reader.ReadLine();
+                        var values = line.Split(',');
+                        DataSet.Instructors.AddInstructorsRow(Convert.ToInt32(values[0]), values[1]);
+                    }
+
+                }
+                    if (fileLocation.Contains("Students"))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        var line = reader.ReadLine();
+                        var values = line.Split(',');
+                        DataSet.Students.AddStudentsRow(Convert.ToInt32(values[0]), Convert.ToInt32(values[1]), Convert.ToInt32(values[2]),
+                            values[3], Convert.ToInt32(values[4]));
+                    }
+
+                }
+                    
+                    TableAdapterManager.UpdateAll(DataSet);
+                }
+            }
+        }
     }
-}
+
