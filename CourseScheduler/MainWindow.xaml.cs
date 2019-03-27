@@ -176,8 +176,20 @@ namespace CourseScheduler
                     }
 
                 }
-                    
-                    TableAdapterManager.UpdateAll(DataSet);
+
+                if (fileLocation.Contains("Rooms"))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        var line = reader.ReadLine();
+                        var values = line.Split(',');
+                        DataSet.Rooms.AddRoomsRow(Convert.ToInt32(values[0]), values[1],
+                            Convert.ToBoolean(Convert.ToInt32(values[2])), Convert.ToBoolean(Convert.ToInt32(values[3])));
+                    }
+
+                }
+
+                TableAdapterManager.UpdateAll(DataSet);
                 }
             }
         }
