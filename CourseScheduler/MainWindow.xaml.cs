@@ -31,6 +31,8 @@ namespace CourseScheduler
         CourseSchedulerDataSetTableAdapters.RoomsTableAdapter RoomsTableAdapter;
         CourseSchedulerDataSetTableAdapters.StudentsTableAdapter StudentsTableAdapter;
         CourseSchedulerDataSetTableAdapters.TableAdapterManager TableAdapterManager;
+        CourseSchedulerDataSetTableAdapters.SchedulesTableAdapter SchedulesTableAdapter;
+        CourseSchedulerDataSetTableAdapters.Join_Schedules_PossibleCoursesTableAdapter Join_Schedules_PossibleCoursesTableAdapter;
         CourseSchedulerDataSet DataSet;
 
         public MainWindow()
@@ -73,6 +75,12 @@ namespace CourseScheduler
             StudentsTableAdapter = new CourseSchedulerDataSetTableAdapters.StudentsTableAdapter();
             StudentsTableAdapter.Fill(DataSet.Students);
 
+            Join_Schedules_PossibleCoursesTableAdapter = new CourseSchedulerDataSetTableAdapters.Join_Schedules_PossibleCoursesTableAdapter();
+            Join_Schedules_PossibleCoursesTableAdapter.Fill(DataSet.Join_Schedules_PossibleCourses);
+
+            SchedulesTableAdapter = new CourseSchedulerDataSetTableAdapters.SchedulesTableAdapter();
+            SchedulesTableAdapter.Fill(DataSet.Schedules);
+
             TableAdapterManager = new CourseSchedulerDataSetTableAdapters.TableAdapterManager();
             TableAdapterManager.CourseCombinationsTableAdapter = CourseCombinationsTableAdapter;
             TableAdapterManager.CourseEnrollmentsTableAdapter = CourseEnrollmentsTableAdapter;
@@ -82,6 +90,8 @@ namespace CourseScheduler
             TableAdapterManager.PossibleCoursesTableAdapter = PossibleCoursesTableAdapter;
             TableAdapterManager.RoomsTableAdapter = RoomsTableAdapter;
             TableAdapterManager.StudentsTableAdapter = StudentsTableAdapter;
+            TableAdapterManager.SchedulesTableAdapter = SchedulesTableAdapter;
+            TableAdapterManager.Join_Schedules_PossibleCoursesTableAdapter = Join_Schedules_PossibleCoursesTableAdapter;
         }
 
         private void UpdateDatabase_Click(object sender, RoutedEventArgs e)
