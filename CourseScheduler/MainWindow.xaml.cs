@@ -21,84 +21,25 @@ namespace CourseScheduler
     /// </summary>
     public partial class MainWindow : Window
     {
-        CourseSchedulerDataSetTableAdapters.CombinationsTableAdapter CombinationsTableAdapter;
-        CourseSchedulerDataSetTableAdapters.CourseCombinationsTableAdapter CourseCombinationsTableAdapter;
-        CourseSchedulerDataSetTableAdapters.CourseEnrollmentsTableAdapter CourseEnrollmentsTableAdapter;
-        CourseSchedulerDataSetTableAdapters.CoursesTableAdapter CoursesTableAdapter;
-        CourseSchedulerDataSetTableAdapters.InstructorPreferencesTableAdapter InstructorPreferencesTableAdapter;
-        CourseSchedulerDataSetTableAdapters.InstructorsTableAdapter InstructorsTableAdapter;
-        CourseSchedulerDataSetTableAdapters.PossibleCoursesTableAdapter PossibleCoursesTableAdapter;
-        CourseSchedulerDataSetTableAdapters.RoomsTableAdapter RoomsTableAdapter;
-        CourseSchedulerDataSetTableAdapters.StudentsTableAdapter StudentsTableAdapter;
-        CourseSchedulerDataSetTableAdapters.TableAdapterManager TableAdapterManager;
-        CourseSchedulerDataSetTableAdapters.SchedulesTableAdapter SchedulesTableAdapter;
-        CourseSchedulerDataSetTableAdapters.Join_Schedules_PossibleCoursesTableAdapter Join_Schedules_PossibleCoursesTableAdapter;
-        CourseSchedulerDataSet DataSet;
+        DataBaseHandler dataBaseHandler;
 
         public MainWindow()
         {
             InitializeComponent();
+            dataBaseHandler = new DataBaseHandler();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            InitializeDataSet();
-        }
-
-        private void InitializeDataSet()
-        {
-            DataSet = (CourseSchedulerDataSet)FindResource("courseSchedulerDataSet");
-            CombinationsTableAdapter = new CourseSchedulerDataSetTableAdapters.CombinationsTableAdapter();
-            CombinationsTableAdapter.Fill(DataSet.Combinations);
-
-            CourseCombinationsTableAdapter = new CourseSchedulerDataSetTableAdapters.CourseCombinationsTableAdapter();
-            CourseCombinationsTableAdapter.Fill(DataSet.CourseCombinations);
-
-            CourseEnrollmentsTableAdapter = new CourseSchedulerDataSetTableAdapters.CourseEnrollmentsTableAdapter();
-            CourseEnrollmentsTableAdapter.Fill(DataSet.CourseEnrollments);
-
-            CoursesTableAdapter = new CourseSchedulerDataSetTableAdapters.CoursesTableAdapter();
-            CoursesTableAdapter.Fill(DataSet.Courses);
-
-            InstructorPreferencesTableAdapter = new CourseSchedulerDataSetTableAdapters.InstructorPreferencesTableAdapter();
-            InstructorPreferencesTableAdapter.Fill(DataSet.InstructorPreferences);
-
-            InstructorsTableAdapter = new CourseSchedulerDataSetTableAdapters.InstructorsTableAdapter();
-            InstructorsTableAdapter.Fill(DataSet.Instructors);
-
-            PossibleCoursesTableAdapter = new CourseSchedulerDataSetTableAdapters.PossibleCoursesTableAdapter();
-            PossibleCoursesTableAdapter.Fill(DataSet.PossibleCourses);
-
-            RoomsTableAdapter = new CourseSchedulerDataSetTableAdapters.RoomsTableAdapter();
-            RoomsTableAdapter.Fill(DataSet.Rooms);
-
-            StudentsTableAdapter = new CourseSchedulerDataSetTableAdapters.StudentsTableAdapter();
-            StudentsTableAdapter.Fill(DataSet.Students);
-
-            Join_Schedules_PossibleCoursesTableAdapter = new CourseSchedulerDataSetTableAdapters.Join_Schedules_PossibleCoursesTableAdapter();
-            Join_Schedules_PossibleCoursesTableAdapter.Fill(DataSet.Join_Schedules_PossibleCourses);
-
-            SchedulesTableAdapter = new CourseSchedulerDataSetTableAdapters.SchedulesTableAdapter();
-            SchedulesTableAdapter.Fill(DataSet.Schedules);
-
-            TableAdapterManager = new CourseSchedulerDataSetTableAdapters.TableAdapterManager();
-            TableAdapterManager.CourseCombinationsTableAdapter = CourseCombinationsTableAdapter;
-            TableAdapterManager.CourseEnrollmentsTableAdapter = CourseEnrollmentsTableAdapter;
-            TableAdapterManager.CoursesTableAdapter = CoursesTableAdapter;
-            TableAdapterManager.InstructorPreferencesTableAdapter = InstructorPreferencesTableAdapter;
-            TableAdapterManager.InstructorsTableAdapter = InstructorsTableAdapter;
-            TableAdapterManager.PossibleCoursesTableAdapter = PossibleCoursesTableAdapter;
-            TableAdapterManager.RoomsTableAdapter = RoomsTableAdapter;
-            TableAdapterManager.StudentsTableAdapter = StudentsTableAdapter;
-            TableAdapterManager.SchedulesTableAdapter = SchedulesTableAdapter;
-            TableAdapterManager.Join_Schedules_PossibleCoursesTableAdapter = Join_Schedules_PossibleCoursesTableAdapter;
+            dataBaseHandler.FillAdaptersWithDataSet();
+            DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_StudentsTableAdapter.GetData();
         }
 
         private void UpdateDatabase_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                TableAdapterManager.UpdateAll(DataSet);
+                dataBaseHandler.FillAdaptersWithDataSet();
                 MessageBox.Show("Database Updated", "Update", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
@@ -113,7 +54,6 @@ namespace CourseScheduler
             courses_Loaded.Visibility = Visibility.Hidden;
 
             string courseLocation = Load_CSV();
-
             courses.Content = courseLocation;
 
             if (courses.Content.ToString() != "File Location")
@@ -126,17 +66,13 @@ namespace CourseScheduler
         {
             // Create OpenFileDialog 
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-
-
-
+            
             // Set filter for file extension and default file extension 
             dlg.DefaultExt = ".csv";
             dlg.Filter = "CSV Files (*.csv)|*.csv";
 
-
             // Display OpenFileDialog by calling ShowDialog method 
             Nullable<bool> result = dlg.ShowDialog();
-
 
             // Get the selected file name and display in a TextBox 
             if (result == true)
@@ -152,39 +88,37 @@ namespace CourseScheduler
         public void Read_CSV(string fileLocation)
         {
             using (var reader = new StreamReader(fileLocation))
-            {            
-
-                    //Add File To DataBase
-                    if (fileLocation.Contains("Courses")){
-                    while (!reader.EndOfStream)
-                        {
-                            var line = reader.ReadLine();
-                            var values = line.Split(',');
-                            DataSet.Courses.AddCoursesRow(Convert.ToInt32(values[0]), values[1], Convert.ToInt32(values[2]),
-                                Convert.ToBoolean(Convert.ToInt32(values[3])), Convert.ToBoolean(Convert.ToInt32(values[4])), Convert.ToBoolean(Convert.ToInt32(values[5])),
-                                Convert.ToBoolean(Convert.ToInt32(values[6])), values[7], Convert.ToInt32(values[8]));
-                        }
-                    }
-                    if (fileLocation.Contains("Instructors"))
+            {
+                //Add File To DataBase
+                if (fileLocation.Contains("Courses"))
                 {
                     while (!reader.EndOfStream)
                     {
                         var line = reader.ReadLine();
                         var values = line.Split(',');
-                        DataSet.Instructors.AddInstructorsRow(Convert.ToInt32(values[0]), values[1]);
+                        dataBaseHandler.InsertNewCourse(values[1], Convert.ToInt32(values[2]), Convert.ToBoolean(Convert.ToInt32(values[3])), Convert.ToBoolean(Convert.ToInt32(values[4])), Convert.ToBoolean(Convert.ToInt32(values[5])), Convert.ToBoolean(Convert.ToInt32(values[6])), values[7], Convert.ToInt32(values[8]));
+                    }
+                }
+
+                if (fileLocation.Contains("Instructors"))
+                {
+                    while (!reader.EndOfStream)
+                    {
+                        var line = reader.ReadLine();
+                        var values = line.Split(',');
+                        dataBaseHandler.InsertNewInstructor(values[1]);
                     }
 
                 }
-                    if (fileLocation.Contains("Students"))
+
+                if (fileLocation.Contains("Students"))
                 {
                     while (!reader.EndOfStream)
                     {
                         var line = reader.ReadLine();
                         var values = line.Split(',');
-                        DataSet.Students.AddStudentsRow(Convert.ToInt32(values[0]), Convert.ToInt32(values[1]), Convert.ToInt32(values[2]),
-                            values[3], Convert.ToInt32(values[4]));
+                        //dataBaseHandler.InsertNewStudent(Convert.ToInt32(values[0]), Convert.ToInt32(values[1]), Convert.ToInt32(values[2]), values[3], Convert.ToInt32(values[4]));
                     }
-
                 }
 
                 if (fileLocation.Contains("Rooms"))
@@ -193,15 +127,70 @@ namespace CourseScheduler
                     {
                         var line = reader.ReadLine();
                         var values = line.Split(',');
-                        DataSet.Rooms.AddRoomsRow(Convert.ToInt32(values[0]), values[1],
-                            Convert.ToBoolean(Convert.ToInt32(values[2])), Convert.ToBoolean(Convert.ToInt32(values[3])));
+                        dataBaseHandler.InsertNewRoom(values[1], Convert.ToBoolean(Convert.ToInt32(values[2])), Convert.ToBoolean(Convert.ToInt32(values[3])));
                     }
-
-                }
-
-                TableAdapterManager.UpdateAll(DataSet);
                 }
             }
         }
+
+        private string GetDbTableItem()
+        {
+            return TableSelector.SelectionBoxItem.ToString();
+        }
+
+        private void UpdateTable()
+        {
+            switch (GetDbTableItem())
+            {
+                case "Combinations":
+                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_CombinationsTableAdapter.GetData();
+                    break;
+                case "CourseCombinations":
+                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_CourseCombinationsTableAdapter.GetData();
+                    break;
+                case "CourseEnrollments":
+                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_CourseEnrollmentsTableAdapter.GetData();
+                    break;
+                case "Courses":
+                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_CoursesTableAdapter.GetData();
+                    break;
+                case "InstructorPreferences":
+                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_InstructorPreferencesTableAdapter.GetData();
+                    break;
+                case "Instructors":
+                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_InstructorsTableAdapter.GetData();
+                    break;
+                case "Join_Schedules_PossibleCourses":
+                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_Join_Schedules_PossibleCoursesTableAdapter.GetData();
+                    break;
+                case "PossibleCourses":
+                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_PossibleCoursesTableAdapter.GetData();
+                    break;
+                case "Rooms":
+                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_RoomsTableAdapter.GetData();
+                    break;
+                case "Schedules":
+                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_SchedulesTableAdapter.GetData();
+                    break;
+                case "Students":
+                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_StudentsTableAdapter.GetData();
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void TableSelector_DropDownClosed(object sender, EventArgs e)
+        {
+            UpdateTable();
+        }
+
+        private void AddNewItem_Click(object sender, RoutedEventArgs e)
+        {
+            DbItemCreationWindow dbItemCreationWindow = new DbItemCreationWindow(GetDbTableItem(), dataBaseHandler);
+            dbItemCreationWindow.ShowDialog();
+            dataBaseHandler.TableAdapterManagerUpdateAll();
+        }
     }
+}
 

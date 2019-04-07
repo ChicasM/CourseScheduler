@@ -70,6 +70,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Custom Controls\AddCourseControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Custom Controls\AddCourseEnrollmentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DbItemCreationWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -78,17 +90,34 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CourseSchedulerDataSet.Designer.cs">
+    <Compile Include="CourseSchedulerDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>CourseSchedulerDataSet.xsd</DependentUpon>
+      <DependentUpon>CourseSchedulerDBDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Controls\AddCourseControl.xaml.cs">
+      <DependentUpon>AddCourseControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Controls\AddCourseEnrollmentControl.xaml.cs">
+      <DependentUpon>AddCourseEnrollmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataBaseHandler.cs" />
+    <Compile Include="DbItemCreationWindow.xaml.cs">
+      <DependentUpon>DbItemCreationWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Custom Controls\AddCombinationsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Custom Controls\AddCombinationsControl.xaml.cs">
+      <DependentUpon>AddCombinationsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -106,16 +135,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="CourseSchedulerDataSet.xsc">
-      <DependentUpon>CourseSchedulerDataSet.xsd</DependentUpon>
+    <None Include="CourseSchedulerDBDataSet.xsc">
+      <DependentUpon>CourseSchedulerDBDataSet.xsd</DependentUpon>
     </None>
-    <None Include="CourseSchedulerDataSet.xsd">
+    <None Include="CourseSchedulerDBDataSet.xsd">
       <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>CourseSchedulerDataSet.Designer.cs</LastGenOutput>
+      <LastGenOutput>CourseSchedulerDBDataSet.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
-    <None Include="CourseSchedulerDataSet.xss">
-      <DependentUpon>CourseSchedulerDataSet.xsd</DependentUpon>
+    <None Include="CourseSchedulerDBDataSet.xss">
+      <DependentUpon>CourseSchedulerDBDataSet.xsd</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -123,7 +152,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
@@ -138,12 +169,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="CourseScheduler.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    <Content Include="CourseSchedulerDB.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="CourseScheduler_log.ldf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <DependentUpon>CourseScheduler.mdf</DependentUpon>
+    <Content Include="CourseSchedulerDB_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>CourseSchedulerDB.mdf</DependentUpon>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

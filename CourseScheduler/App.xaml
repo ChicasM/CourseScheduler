@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:CourseScheduler"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <local:CourseSchedulerDBDataSet x:Key="courseSchedulerDBDataSet"/>
     </Application.Resources>
 </Application>
