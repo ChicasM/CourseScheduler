@@ -33,5 +33,27 @@ namespace CourseScheduler.Properties {
                 return ((string)(this["CourseSchedulerConnectionString"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\bin\\Debug\\Cou" +
+            "rseScheduler.mdf;Integrated Security=True;Connect Timeout=30")]
+        public string CourseSchedulerConnectionString1 {
+            get {
+                return ((string)(this["CourseSchedulerConnectionString1"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\\CourseSchedul" +
+            "erDB.mdf;Integrated Security=True;Connect Timeout=30")]
+        public string CourseSchedulerDBConnectionString {
+            get {
+                return ((string)(this["CourseSchedulerDBConnectionString"]));
+            }
+        }
     }
 }

@@ -1,73 +1,47 @@
-﻿<Window x:Class="CourseScheduler.MainWindow"
+﻿<Window
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:CourseScheduler"
+        xmlns:local="clr-namespace:CourseScheduler" x:Class="CourseScheduler.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow" Height="1000" Width="1850
-        " Loaded="Window_Loaded">
+        Title="MainWindow" Height="960" Width="1280" Loaded="Window_Loaded">
     <Window.Resources>
-        <local:CourseSchedulerDataSet x:Key="courseSchedulerDataSet"/>
-        <CollectionViewSource x:Key="studentsViewSource" Source="{Binding Students, Source={StaticResource courseSchedulerDataSet}}"/>
-        <CollectionViewSource x:Key="instructorsViewSource" Source="{Binding Instructors, Source={StaticResource courseSchedulerDataSet}}"/>
-        <CollectionViewSource x:Key="coursesViewSource" Source="{Binding Courses, Source={StaticResource courseSchedulerDataSet}}"/>
-        <CollectionViewSource x:Key="courseEnrollmentsViewSource" Source="{Binding CourseEnrollments, Source={StaticResource courseSchedulerDataSet}}"/>
-        <CollectionViewSource x:Key="instructorPreferencesViewSource" Source="{Binding InstructorPreferences, Source={StaticResource courseSchedulerDataSet}}"/>
-        <CollectionViewSource x:Key="courseCombinationsViewSource" Source="{Binding CourseCombinations, Source={StaticResource courseSchedulerDataSet}}"/>
-        <CollectionViewSource x:Key="combinationsViewSource" Source="{Binding Combinations, Source={StaticResource courseSchedulerDataSet}}"/>
-        <CollectionViewSource x:Key="possibleCoursesViewSource" Source="{Binding PossibleCourses, Source={StaticResource courseSchedulerDataSet}}"/>
-        <CollectionViewSource x:Key="roomsViewSource" Source="{Binding Rooms, Source={StaticResource courseSchedulerDataSet}}"/>
     </Window.Resources>
-    <Grid Margin="0,0,0,108">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="678*"/>
-            <ColumnDefinition Width="7*"/>
-            <ColumnDefinition Width="11*"/>
-        </Grid.ColumnDefinitions>
-        <TabControl HorizontalAlignment="Left" Margin="10,10,0,-104" Width="1850" TabStripPlacement="Left" Grid.ColumnSpan="3">
+    <Grid Margin="0,0,0,0">
+        <TabControl HorizontalAlignment="Left" Margin="10,10,10,10" Width="auto" TabStripPlacement="Left">
             <TabItem Header="Home" Height="30" Width="115">
                 <Grid Background="#FFE5E5E5" HorizontalAlignment="Left" Width="1263" Margin="0,0,-14,114">
                     <Label Content="Operator's Manual" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-                    <TextBlock HorizontalAlignment="Left" Margin="10,36,0,122" TextWrapping="Wrap" Width="1252">
-                        The "Home" Tab displays basic user functionality and how to help documentation.<LineBreak/>
-                        The "Administrator View" Tab displays tables and the ability to manually Create Update and Delete records in the database.<LineBreak/>
-                        ____This can disrupt the natural flow of the application so use with caution.<LineBreak/>
-                        ____If normal work flow is disrupted, you can recreate the database from the "Load CSV" tab.<LineBreak/>
-                        ____Any changes made to the tables are stored within the application.<LineBreak/>
-                        ____To save the changes press the "Update Database" button.<LineBreak/>
-                        The "Load CSV" tab loads a file provided by the University that will fill the database.<LineBreak/>
-                        The "Reports" tab provides a space to generate reports.<LineBreak/><LineBreak/><LineBreak/>
-                        DEVELOPER NOTES: remove when pushing to release.<LineBreak/>
-                        Further tabs can be added if needed.<LineBreak/>
-                        Copy the TabItem tab and then change the Header property.
-                    </TextBlock>
+                    <TextBlock HorizontalAlignment="Left" Margin="10,36,0,122" TextWrapping="Wrap" Width="1252"><Run Text="The &quot;Home&quot; Tab displays basic user functionality and how to help documentation."/><LineBreak/><Run Text="The &quot;Administrator View&quot; Tab displays tables and the ability to manually Create Update and Delete records in the database."/><LineBreak/><Run Text="____This can disrupt the natural flow of the application so use with caution."/><LineBreak/><Run Text="____If normal work flow is disrupted, you can recreate the database from the &quot;Load CSV&quot; tab."/><LineBreak/><Run Text="____Any changes made to the tables are stored within the application."/><LineBreak/><Run Text="____To save the changes press the &quot;Update Database&quot; button."/><LineBreak/><Run Text="The &quot;Load CSV&quot; tab loads a file provided by the University that will fill the database."/><LineBreak/><Run Text="The &quot;Reports&quot; tab provides a space to generate reports."/><LineBreak/><LineBreak/><LineBreak/><Run Text="DEVELOPER NOTES: remove when pushing to release."/><LineBreak/><Run Text="Further tabs can be added if needed."/><LineBreak/><Run Text="Copy the TabItem tab and then change the Header property."/></TextBlock>
                 </Grid>
             </TabItem>
             <TabItem Header="Administrator View" Height="30" Width="115">
-                <Grid Background="#FFE5E5E5" DataContext="{StaticResource studentsViewSource}" Margin="0,0,22,0">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1608*"/>
-                        <ColumnDefinition Width="90*"/>
-                        <ColumnDefinition Width="447*"/>
-                    </Grid.ColumnDefinitions>
-                    <DataGrid HorizontalAlignment="Left" Height="280" Margin="10,10,0,0" VerticalAlignment="Top" Width="540" ItemsSource="{Binding Source={StaticResource combinationsViewSource}}"/>
-                    <DataGrid HorizontalAlignment="Left" Height="280" Margin="555,10,0,0" VerticalAlignment="Top" Width="540" ItemsSource="{Binding Source={StaticResource courseCombinationsViewSource}}"/>
-                    <DataGrid HorizontalAlignment="Left" Height="280" Margin="1099,10,0,0" VerticalAlignment="Top" Width="540" ItemsSource="{Binding Source={StaticResource courseEnrollmentsViewSource}}" Grid.ColumnSpan="3"/>
-                    <DataGrid HorizontalAlignment="Left" Height="280" Margin="10,295,0,0" VerticalAlignment="Top" Width="540" ItemsSource="{Binding Source={StaticResource coursesViewSource}}"/>
-                    <DataGrid HorizontalAlignment="Left" Height="280" Margin="555,295,0,0" VerticalAlignment="Top" Width="540" ItemsSource="{Binding Source={StaticResource instructorPreferencesViewSource}}"/>
-                    <DataGrid HorizontalAlignment="Left" Height="280" Margin="1099,295,0,0" VerticalAlignment="Top" Width="540" ItemsSource="{Binding Source={StaticResource instructorsViewSource}}" Grid.ColumnSpan="3"/>
-                    <DataGrid HorizontalAlignment="Left" Height="280" Margin="10,580,0,0" VerticalAlignment="Top" Width="540" ItemsSource="{Binding Source={StaticResource possibleCoursesViewSource}}"/>
-                    <DataGrid HorizontalAlignment="Left" Height="280" Margin="555,580,0,0" VerticalAlignment="Top" Width="540" ItemsSource="{Binding Source={StaticResource roomsViewSource}}"/>
-                    <DataGrid HorizontalAlignment="Left" Height="280" Margin="1099,580,0,0" VerticalAlignment="Top" Width="540" ItemsSource="{Binding}" Grid.ColumnSpan="3"/>
-                    <Button x:Name="UpdateDatabase" Content="Update Database" HorizontalAlignment="Left" Margin="231,885,0,0" VerticalAlignment="Top" Width="150" Height="30" FontSize="16" Click="UpdateDatabase_Click" Grid.Column="2"/>
+                <Grid Background="#FFE5E5E5" Margin="0,0,0,0" Width="1130">
+                    <DataGrid x:Name="DataGrid_DbTable" HorizontalAlignment="Left" Height="790" Margin="10,10,0,0" VerticalAlignment="Top" Width="1110" CanUserAddRows="False"/>
+                    <Button x:Name="UpdateDatabase" Content="Update Database" HorizontalAlignment="Left" Margin="10,863,0,0" VerticalAlignment="Top" Width="150" Height="30" FontSize="16" Click="UpdateDatabase_Click"/>
+                    <ComboBox x:Name="TableSelector" HorizontalAlignment="Left" Margin="10,836,0,0" VerticalAlignment="Top" Width="228" DropDownClosed="TableSelector_DropDownClosed">
+                        <ComboBoxItem IsSelected="True">Students</ComboBoxItem>
+                        <ComboBoxItem>CourseEnrollments</ComboBoxItem>
+                        <ComboBoxItem>Courses</ComboBoxItem>
+                        <ComboBoxItem>Instructors</ComboBoxItem>
+                        <ComboBoxItem>InstructorPreferences</ComboBoxItem>
+                        <ComboBoxItem>CourseCombinations</ComboBoxItem>
+                        <ComboBoxItem>Combinations</ComboBoxItem>
+                        <ComboBoxItem>PossibleCourses</ComboBoxItem>
+                        <ComboBoxItem>Rooms</ComboBoxItem>
+                        <ComboBoxItem>Schedules</ComboBoxItem>
+                        <ComboBoxItem>Join_Schedules_PossibleCourses</ComboBoxItem>
+                    </ComboBox>
+                    <Label Content="Select Table" HorizontalAlignment="Left" Margin="10,805,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="AddNewItem" Content="AddNewItem" HorizontalAlignment="Left" Margin="299,863,0,0" VerticalAlignment="Top" Width="150" Height="30" FontSize="16" Click="AddNewItem_Click"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Load CSV" Height="30" Width="115">
                 <Grid Background="#FFE5E5E5">
                     <Button Content="Load File" HorizontalAlignment="Left" Margin="12,30,0,0" VerticalAlignment="Top" Width="159" Click="Button_Click"/>
-                    <Label Name ="courses" Content="File Location"  HorizontalAlignment="Left" Margin="207,24,0,0" VerticalAlignment="Top" Width="448" Foreground="#FF9B9292"/>
-                    <Label Name ="courses_Loaded" Content="Done"  HorizontalAlignment="Left" Margin="171,50,0,0" VerticalAlignment="Top" Width="448" Foreground="Black" Visibility ="hidden"/>
+                    <Label x:Name ="courses" Content="File Location"  HorizontalAlignment="Left" Margin="207,24,0,0" VerticalAlignment="Top" Width="448" Foreground="#FF9B9292"/>
+                    <Label x:Name ="courses_Loaded" Content="Done"  HorizontalAlignment="Left" Margin="171,50,0,0" VerticalAlignment="Top" Width="448" Foreground="Black" Visibility ="hidden"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Reports" Height="30" Width="115">
