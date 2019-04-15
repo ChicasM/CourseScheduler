@@ -176,5 +176,14 @@ namespace CourseScheduler
             DataSet.Join_Schedules_PossibleCourses.AddJoin_Schedules_PossibleCoursesRow(Schedule, PossibleCourse);
             Join_Schedules_PossibleCoursesTableAdapter.Update(DataSet.Join_Schedules_PossibleCourses);
         }
+
+        public DataTable GetPossibleCourses(int ID)
+        {
+            DataTable tbl = Join_Schedules_PossibleCoursesTableAdapter.GetPossibleCourses(ID);
+
+            //PossibleCoursesTableAdapter.GetAllPossibleCourses()
+
+            return tbl;
+        }
     }
 }

@@ -90,6 +90,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="CourseSchedulerDBDataSet.cs">
+      <DependentUpon>CourseSchedulerDBDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="CourseSchedulerDBDataSet.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -10,6 +10,8 @@
 
 #pragma warning disable 1591
 
+using System;
+
 namespace CourseScheduler {
     
     
@@ -68,29 +70,29 @@ namespace CourseScheduler {
         
         private NoRelation_Join_Schedules_PossibleCoursesDataTable tableNoRelation_Join_Schedules_PossibleCourses;
         
-        private global::System.Data.DataRelation relationFK_Combinations_CourseCombinations;
+        private global::System.Data.DataRelation relationFK_Courses_CourseCombinations;
         
         private global::System.Data.DataRelation relationFK_CourseCombinations_CourseCombinations;
         
-        private global::System.Data.DataRelation relationFK_Courses_CourseCombinations;
-        
-        private global::System.Data.DataRelation relationFK_Courses_CourseEnrollments;
+        private global::System.Data.DataRelation relationFK_Combinations_CourseCombinations;
         
         private global::System.Data.DataRelation relationFK_Students_CourseEnrollments;
         
-        private global::System.Data.DataRelation relationFK_Instructors_InstructorPreferences;
+        private global::System.Data.DataRelation relationFK_Courses_CourseEnrollments;
         
         private global::System.Data.DataRelation relationFK_Courses_InstructorPreferences;
         
-        private global::System.Data.DataRelation relationFK_PossibleCourses_Join_Schedules_PossibleCourses;
+        private global::System.Data.DataRelation relationFK_Instructors_InstructorPreferences;
         
         private global::System.Data.DataRelation relationFK_Schedules_Join_Schedules_PossibleCourses;
         
-        private global::System.Data.DataRelation relationFK_Rooms_PossibleCourses;
+        private global::System.Data.DataRelation relationFK_PossibleCourses_Join_Schedules_PossibleCourses;
+        
+        private global::System.Data.DataRelation relationFK_Courses_PossibleCourses;
         
         private global::System.Data.DataRelation relationFK_Instructors_PossibleCourses;
         
-        private global::System.Data.DataRelation relationFK_Courses_PossibleCourses;
+        private global::System.Data.DataRelation relationFK_Rooms_PossibleCourses;
         
         private global::System.Data.SchemaSerializationMode _schemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
         
@@ -722,18 +724,18 @@ namespace CourseScheduler {
                     this.tableNoRelation_Join_Schedules_PossibleCourses.InitVars();
                 }
             }
-            this.relationFK_Combinations_CourseCombinations = this.Relations["FK_Combinations_CourseCombinations"];
-            this.relationFK_CourseCombinations_CourseCombinations = this.Relations["FK_CourseCombinations_CourseCombinations"];
             this.relationFK_Courses_CourseCombinations = this.Relations["FK_Courses_CourseCombinations"];
-            this.relationFK_Courses_CourseEnrollments = this.Relations["FK_Courses_CourseEnrollments"];
+            this.relationFK_CourseCombinations_CourseCombinations = this.Relations["FK_CourseCombinations_CourseCombinations"];
+            this.relationFK_Combinations_CourseCombinations = this.Relations["FK_Combinations_CourseCombinations"];
             this.relationFK_Students_CourseEnrollments = this.Relations["FK_Students_CourseEnrollments"];
-            this.relationFK_Instructors_InstructorPreferences = this.Relations["FK_Instructors_InstructorPreferences"];
+            this.relationFK_Courses_CourseEnrollments = this.Relations["FK_Courses_CourseEnrollments"];
             this.relationFK_Courses_InstructorPreferences = this.Relations["FK_Courses_InstructorPreferences"];
-            this.relationFK_PossibleCourses_Join_Schedules_PossibleCourses = this.Relations["FK_PossibleCourses_Join_Schedules_PossibleCourses"];
+            this.relationFK_Instructors_InstructorPreferences = this.Relations["FK_Instructors_InstructorPreferences"];
             this.relationFK_Schedules_Join_Schedules_PossibleCourses = this.Relations["FK_Schedules_Join_Schedules_PossibleCourses"];
-            this.relationFK_Rooms_PossibleCourses = this.Relations["FK_Rooms_PossibleCourses"];
-            this.relationFK_Instructors_PossibleCourses = this.Relations["FK_Instructors_PossibleCourses"];
+            this.relationFK_PossibleCourses_Join_Schedules_PossibleCourses = this.Relations["FK_PossibleCourses_Join_Schedules_PossibleCourses"];
             this.relationFK_Courses_PossibleCourses = this.Relations["FK_Courses_PossibleCourses"];
+            this.relationFK_Instructors_PossibleCourses = this.Relations["FK_Instructors_PossibleCourses"];
+            this.relationFK_Rooms_PossibleCourses = this.Relations["FK_Rooms_PossibleCourses"];
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -789,9 +791,9 @@ namespace CourseScheduler {
             this.tableNoRelation_Join_Schedules_PossibleCourses = new NoRelation_Join_Schedules_PossibleCoursesDataTable();
             base.Tables.Add(this.tableNoRelation_Join_Schedules_PossibleCourses);
             global::System.Data.ForeignKeyConstraint fkc;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_Combinations_CourseCombinations", new global::System.Data.DataColumn[] {
-                        this.tableCombinations.CombinationIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCourseCombinations.CombinationIDColumn});
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_Courses_CourseCombinations", new global::System.Data.DataColumn[] {
+                        this.tableCourses.CourseIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCourseCombinations.CourseIDColumn});
             this.tableCourseCombinations.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
@@ -803,17 +805,10 @@ namespace CourseScheduler {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_Courses_CourseCombinations", new global::System.Data.DataColumn[] {
-                        this.tableCourses.CourseIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCourseCombinations.CourseIDColumn});
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_Combinations_CourseCombinations", new global::System.Data.DataColumn[] {
+                        this.tableCombinations.CombinationIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCourseCombinations.CombinationIDColumn});
             this.tableCourseCombinations.Constraints.Add(fkc);
-            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
-            fkc.DeleteRule = global::System.Data.Rule.Cascade;
-            fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_Courses_CourseEnrollments", new global::System.Data.DataColumn[] {
-                        this.tableCourses.CourseIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCourseEnrollments.CourseIDColumn});
-            this.tableCourseEnrollments.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
@@ -824,10 +819,10 @@ namespace CourseScheduler {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_Instructors_InstructorPreferences", new global::System.Data.DataColumn[] {
-                        this.tableInstructors.InstructorIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableInstructorPreferences.InstructorIDColumn});
-            this.tableInstructorPreferences.Constraints.Add(fkc);
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_Courses_CourseEnrollments", new global::System.Data.DataColumn[] {
+                        this.tableCourses.CourseIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCourseEnrollments.CourseIDColumn});
+            this.tableCourseEnrollments.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
@@ -838,10 +833,10 @@ namespace CourseScheduler {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_PossibleCourses_Join_Schedules_PossibleCourses", new global::System.Data.DataColumn[] {
-                        this.tablePossibleCourses.PossibleCourseIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableJoin_Schedules_PossibleCourses.PossibleCourseIDColumn});
-            this.tableJoin_Schedules_PossibleCourses.Constraints.Add(fkc);
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_Instructors_InstructorPreferences", new global::System.Data.DataColumn[] {
+                        this.tableInstructors.InstructorIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableInstructorPreferences.InstructorIDColumn});
+            this.tableInstructorPreferences.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
@@ -852,9 +847,16 @@ namespace CourseScheduler {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_Rooms_PossibleCourses", new global::System.Data.DataColumn[] {
-                        this.tableRooms.RoomIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePossibleCourses.RoomIDColumn});
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_PossibleCourses_Join_Schedules_PossibleCourses", new global::System.Data.DataColumn[] {
+                        this.tablePossibleCourses.PossibleCourseIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableJoin_Schedules_PossibleCourses.PossibleCourseIDColumn});
+            this.tableJoin_Schedules_PossibleCourses.Constraints.Add(fkc);
+            fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
+            fkc.DeleteRule = global::System.Data.Rule.Cascade;
+            fkc.UpdateRule = global::System.Data.Rule.Cascade;
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_Courses_PossibleCourses", new global::System.Data.DataColumn[] {
+                        this.tableCourses.CourseIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tablePossibleCourses.CourseIDColumn});
             this.tablePossibleCourses.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
@@ -866,61 +868,61 @@ namespace CourseScheduler {
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            fkc = new global::System.Data.ForeignKeyConstraint("FK_Courses_PossibleCourses", new global::System.Data.DataColumn[] {
-                        this.tableCourses.CourseIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePossibleCourses.CourseIDColumn});
+            fkc = new global::System.Data.ForeignKeyConstraint("FK_Rooms_PossibleCourses", new global::System.Data.DataColumn[] {
+                        this.tableRooms.RoomIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tablePossibleCourses.RoomIDColumn});
             this.tablePossibleCourses.Constraints.Add(fkc);
             fkc.AcceptRejectRule = global::System.Data.AcceptRejectRule.None;
             fkc.DeleteRule = global::System.Data.Rule.Cascade;
             fkc.UpdateRule = global::System.Data.Rule.Cascade;
-            this.relationFK_Combinations_CourseCombinations = new global::System.Data.DataRelation("FK_Combinations_CourseCombinations", new global::System.Data.DataColumn[] {
-                        this.tableCombinations.CombinationIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCourseCombinations.CombinationIDColumn}, false);
-            this.Relations.Add(this.relationFK_Combinations_CourseCombinations);
-            this.relationFK_CourseCombinations_CourseCombinations = new global::System.Data.DataRelation("FK_CourseCombinations_CourseCombinations", new global::System.Data.DataColumn[] {
-                        this.tableCourseCombinations.SubCombinationIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCourseCombinations.CombinationIDColumn}, false);
-            this.Relations.Add(this.relationFK_CourseCombinations_CourseCombinations);
             this.relationFK_Courses_CourseCombinations = new global::System.Data.DataRelation("FK_Courses_CourseCombinations", new global::System.Data.DataColumn[] {
                         this.tableCourses.CourseIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableCourseCombinations.CourseIDColumn}, false);
             this.Relations.Add(this.relationFK_Courses_CourseCombinations);
-            this.relationFK_Courses_CourseEnrollments = new global::System.Data.DataRelation("FK_Courses_CourseEnrollments", new global::System.Data.DataColumn[] {
-                        this.tableCourses.CourseIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableCourseEnrollments.CourseIDColumn}, false);
-            this.Relations.Add(this.relationFK_Courses_CourseEnrollments);
+            this.relationFK_CourseCombinations_CourseCombinations = new global::System.Data.DataRelation("FK_CourseCombinations_CourseCombinations", new global::System.Data.DataColumn[] {
+                        this.tableCourseCombinations.SubCombinationIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCourseCombinations.CombinationIDColumn}, false);
+            this.Relations.Add(this.relationFK_CourseCombinations_CourseCombinations);
+            this.relationFK_Combinations_CourseCombinations = new global::System.Data.DataRelation("FK_Combinations_CourseCombinations", new global::System.Data.DataColumn[] {
+                        this.tableCombinations.CombinationIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCourseCombinations.CombinationIDColumn}, false);
+            this.Relations.Add(this.relationFK_Combinations_CourseCombinations);
             this.relationFK_Students_CourseEnrollments = new global::System.Data.DataRelation("FK_Students_CourseEnrollments", new global::System.Data.DataColumn[] {
                         this.tableStudents.StudentIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableCourseEnrollments.StudentIDColumn}, false);
             this.Relations.Add(this.relationFK_Students_CourseEnrollments);
-            this.relationFK_Instructors_InstructorPreferences = new global::System.Data.DataRelation("FK_Instructors_InstructorPreferences", new global::System.Data.DataColumn[] {
-                        this.tableInstructors.InstructorIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableInstructorPreferences.InstructorIDColumn}, false);
-            this.Relations.Add(this.relationFK_Instructors_InstructorPreferences);
+            this.relationFK_Courses_CourseEnrollments = new global::System.Data.DataRelation("FK_Courses_CourseEnrollments", new global::System.Data.DataColumn[] {
+                        this.tableCourses.CourseIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableCourseEnrollments.CourseIDColumn}, false);
+            this.Relations.Add(this.relationFK_Courses_CourseEnrollments);
             this.relationFK_Courses_InstructorPreferences = new global::System.Data.DataRelation("FK_Courses_InstructorPreferences", new global::System.Data.DataColumn[] {
                         this.tableCourses.CourseIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableInstructorPreferences.CourseIDColumn}, false);
             this.Relations.Add(this.relationFK_Courses_InstructorPreferences);
-            this.relationFK_PossibleCourses_Join_Schedules_PossibleCourses = new global::System.Data.DataRelation("FK_PossibleCourses_Join_Schedules_PossibleCourses", new global::System.Data.DataColumn[] {
-                        this.tablePossibleCourses.PossibleCourseIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tableJoin_Schedules_PossibleCourses.PossibleCourseIDColumn}, false);
-            this.Relations.Add(this.relationFK_PossibleCourses_Join_Schedules_PossibleCourses);
+            this.relationFK_Instructors_InstructorPreferences = new global::System.Data.DataRelation("FK_Instructors_InstructorPreferences", new global::System.Data.DataColumn[] {
+                        this.tableInstructors.InstructorIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableInstructorPreferences.InstructorIDColumn}, false);
+            this.Relations.Add(this.relationFK_Instructors_InstructorPreferences);
             this.relationFK_Schedules_Join_Schedules_PossibleCourses = new global::System.Data.DataRelation("FK_Schedules_Join_Schedules_PossibleCourses", new global::System.Data.DataColumn[] {
                         this.tableSchedules.ScheduleIDColumn}, new global::System.Data.DataColumn[] {
                         this.tableJoin_Schedules_PossibleCourses.ScheduleIDColumn}, false);
             this.Relations.Add(this.relationFK_Schedules_Join_Schedules_PossibleCourses);
-            this.relationFK_Rooms_PossibleCourses = new global::System.Data.DataRelation("FK_Rooms_PossibleCourses", new global::System.Data.DataColumn[] {
-                        this.tableRooms.RoomIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePossibleCourses.RoomIDColumn}, false);
-            this.Relations.Add(this.relationFK_Rooms_PossibleCourses);
-            this.relationFK_Instructors_PossibleCourses = new global::System.Data.DataRelation("FK_Instructors_PossibleCourses", new global::System.Data.DataColumn[] {
-                        this.tableInstructors.InstructorIDColumn}, new global::System.Data.DataColumn[] {
-                        this.tablePossibleCourses.InstructorIDColumn}, false);
-            this.Relations.Add(this.relationFK_Instructors_PossibleCourses);
+            this.relationFK_PossibleCourses_Join_Schedules_PossibleCourses = new global::System.Data.DataRelation("FK_PossibleCourses_Join_Schedules_PossibleCourses", new global::System.Data.DataColumn[] {
+                        this.tablePossibleCourses.PossibleCourseIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tableJoin_Schedules_PossibleCourses.PossibleCourseIDColumn}, false);
+            this.Relations.Add(this.relationFK_PossibleCourses_Join_Schedules_PossibleCourses);
             this.relationFK_Courses_PossibleCourses = new global::System.Data.DataRelation("FK_Courses_PossibleCourses", new global::System.Data.DataColumn[] {
                         this.tableCourses.CourseIDColumn}, new global::System.Data.DataColumn[] {
                         this.tablePossibleCourses.CourseIDColumn}, false);
             this.Relations.Add(this.relationFK_Courses_PossibleCourses);
+            this.relationFK_Instructors_PossibleCourses = new global::System.Data.DataRelation("FK_Instructors_PossibleCourses", new global::System.Data.DataColumn[] {
+                        this.tableInstructors.InstructorIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tablePossibleCourses.InstructorIDColumn}, false);
+            this.Relations.Add(this.relationFK_Instructors_PossibleCourses);
+            this.relationFK_Rooms_PossibleCourses = new global::System.Data.DataRelation("FK_Rooms_PossibleCourses", new global::System.Data.DataColumn[] {
+                        this.tableRooms.RoomIDColumn}, new global::System.Data.DataColumn[] {
+                        this.tablePossibleCourses.RoomIDColumn}, false);
+            this.Relations.Add(this.relationFK_Rooms_PossibleCourses);
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1554,20 +1556,20 @@ namespace CourseScheduler {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void AddCourseCombinationsRow(CourseCombinationsRow row) {
+            public void AddCourseCombinationsRow(CombinationsRow combination, CoursesRow course, CourseCombinationsRow row) {
                 this.Rows.Add(row);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CourseCombinationsRow AddCourseCombinationsRow(CombinationsRow parentCombinationsRowByFK_Combinations_CourseCombinations, CoursesRow parentCoursesRowByFK_Courses_CourseCombinations, int SubCombinationID) {
+            public CourseCombinationsRow AddCourseCombinationsRow(CourseCombinationsRow parentCourseCombinationsRowByFK_CourseCombinations_CourseCombinations, CoursesRow parentCoursesRowByFK_Courses_CourseCombinations, int SubCombinationID) {
                 CourseCombinationsRow rowCourseCombinationsRow = ((CourseCombinationsRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         null,
                         null,
                         SubCombinationID};
-                if ((parentCombinationsRowByFK_Combinations_CourseCombinations != null)) {
-                    columnValuesArray[0] = parentCombinationsRowByFK_Combinations_CourseCombinations[0];
+                if ((parentCourseCombinationsRowByFK_CourseCombinations_CourseCombinations != null)) {
+                    columnValuesArray[0] = parentCourseCombinationsRowByFK_CourseCombinations_CourseCombinations[2];
                 }
                 if ((parentCoursesRowByFK_Courses_CourseCombinations != null)) {
                     columnValuesArray[1] = parentCoursesRowByFK_Courses_CourseCombinations[0];
@@ -1738,6 +1740,11 @@ namespace CourseScheduler {
                 }
                 xs.Add(dsSchema);
                 return type;
+            }
+
+            internal void AddCourseCombinationsRow(CombinationsRow combination, CoursesRow course, int subCombinationID)
+            {
+                throw new NotImplementedException();
             }
         }
         
@@ -8108,12 +8115,12 @@ namespace CourseScheduler {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CombinationsRow CombinationsRow {
+            public CoursesRow CoursesRow {
                 get {
-                    return ((CombinationsRow)(this.GetParentRow(this.Table.ParentRelations["FK_Combinations_CourseCombinations"])));
+                    return ((CoursesRow)(this.GetParentRow(this.Table.ParentRelations["FK_Courses_CourseCombinations"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_Combinations_CourseCombinations"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Courses_CourseCombinations"]);
                 }
             }
             
@@ -8130,12 +8137,12 @@ namespace CourseScheduler {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CoursesRow CoursesRow {
+            public CombinationsRow CombinationsRow {
                 get {
-                    return ((CoursesRow)(this.GetParentRow(this.Table.ParentRelations["FK_Courses_CourseCombinations"])));
+                    return ((CombinationsRow)(this.GetParentRow(this.Table.ParentRelations["FK_Combinations_CourseCombinations"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_Courses_CourseCombinations"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Combinations_CourseCombinations"]);
                 }
             }
             
@@ -8257,23 +8264,23 @@ namespace CourseScheduler {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CoursesRow CoursesRow {
-                get {
-                    return ((CoursesRow)(this.GetParentRow(this.Table.ParentRelations["FK_Courses_CourseEnrollments"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_Courses_CourseEnrollments"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public StudentsRow StudentsRow {
                 get {
                     return ((StudentsRow)(this.GetParentRow(this.Table.ParentRelations["FK_Students_CourseEnrollments"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_Students_CourseEnrollments"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public CoursesRow CoursesRow {
+                get {
+                    return ((CoursesRow)(this.GetParentRow(this.Table.ParentRelations["FK_Courses_CourseEnrollments"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Courses_CourseEnrollments"]);
                 }
             }
         }
@@ -8507,23 +8514,23 @@ namespace CourseScheduler {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public InstructorsRow InstructorsRow {
-                get {
-                    return ((InstructorsRow)(this.GetParentRow(this.Table.ParentRelations["FK_Instructors_InstructorPreferences"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_Instructors_InstructorPreferences"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public CoursesRow CoursesRow {
                 get {
                     return ((CoursesRow)(this.GetParentRow(this.Table.ParentRelations["FK_Courses_InstructorPreferences"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_Courses_InstructorPreferences"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public InstructorsRow InstructorsRow {
+                get {
+                    return ((InstructorsRow)(this.GetParentRow(this.Table.ParentRelations["FK_Instructors_InstructorPreferences"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Instructors_InstructorPreferences"]);
                 }
             }
         }
@@ -8625,23 +8632,23 @@ namespace CourseScheduler {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public PossibleCoursesRow PossibleCoursesRow {
-                get {
-                    return ((PossibleCoursesRow)(this.GetParentRow(this.Table.ParentRelations["FK_PossibleCourses_Join_Schedules_PossibleCourses"])));
-                }
-                set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_PossibleCourses_Join_Schedules_PossibleCourses"]);
-                }
-            }
-            
-            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
             public SchedulesRow SchedulesRow {
                 get {
                     return ((SchedulesRow)(this.GetParentRow(this.Table.ParentRelations["FK_Schedules_Join_Schedules_PossibleCourses"])));
                 }
                 set {
                     this.SetParentRow(value, this.Table.ParentRelations["FK_Schedules_Join_Schedules_PossibleCourses"]);
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+            public PossibleCoursesRow PossibleCoursesRow {
+                get {
+                    return ((PossibleCoursesRow)(this.GetParentRow(this.Table.ParentRelations["FK_PossibleCourses_Join_Schedules_PossibleCourses"])));
+                }
+                set {
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_PossibleCourses_Join_Schedules_PossibleCourses"]);
                 }
             }
         }
@@ -8728,12 +8735,12 @@ namespace CourseScheduler {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public RoomsRow RoomsRow {
+            public CoursesRow CoursesRow {
                 get {
-                    return ((RoomsRow)(this.GetParentRow(this.Table.ParentRelations["FK_Rooms_PossibleCourses"])));
+                    return ((CoursesRow)(this.GetParentRow(this.Table.ParentRelations["FK_Courses_PossibleCourses"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_Rooms_PossibleCourses"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Courses_PossibleCourses"]);
                 }
             }
             
@@ -8750,12 +8757,12 @@ namespace CourseScheduler {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public CoursesRow CoursesRow {
+            public RoomsRow RoomsRow {
                 get {
-                    return ((CoursesRow)(this.GetParentRow(this.Table.ParentRelations["FK_Courses_PossibleCourses"])));
+                    return ((RoomsRow)(this.GetParentRow(this.Table.ParentRelations["FK_Rooms_PossibleCourses"])));
                 }
                 set {
-                    this.SetParentRow(value, this.Table.ParentRelations["FK_Courses_PossibleCourses"]);
+                    this.SetParentRow(value, this.Table.ParentRelations["FK_Rooms_PossibleCourses"]);
                 }
             }
             
@@ -12616,11 +12623,17 @@ SELECT ScheduleID, PossibleCourseID FROM Join_Schedules_PossibleCourses WHERE (P
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ScheduleID, PossibleCourseID FROM dbo.Join_Schedules_PossibleCourses";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT        PossibleCourseID\r\nFROM            Join_Schedules_PossibleCourses\r\nW" +
+                "HERE        (ScheduleID = @ID)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ScheduleID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12642,6 +12655,18 @@ SELECT ScheduleID, PossibleCourseID FROM Join_Schedules_PossibleCourses WHERE (P
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual CourseSchedulerDBDataSet.Join_Schedules_PossibleCoursesDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            CourseSchedulerDBDataSet.Join_Schedules_PossibleCoursesDataTable dataTable = new CourseSchedulerDBDataSet.Join_Schedules_PossibleCoursesDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual CourseSchedulerDBDataSet.Join_Schedules_PossibleCoursesDataTable GetPossibleCourses(int ID) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ID));
             CourseSchedulerDBDataSet.Join_Schedules_PossibleCoursesDataTable dataTable = new CourseSchedulerDBDataSet.Join_Schedules_PossibleCoursesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -12933,12 +12958,19 @@ SELECT PossibleCourseID, CourseID, InstructorID, TimeOffered, DateOffered, RoomI
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT PossibleCourseID, CourseID, InstructorID, TimeOffered, DateOffered, RoomID" +
                 " FROM dbo.PossibleCourses";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT        PossibleCourseID, CourseID, InstructorID, TimeOffered, DateOffered," +
+                " RoomID\r\nFROM            PossibleCourses\r\nWHERE        (PossibleCourseID = @InID" +
+                "s)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InIDs", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "PossibleCourseID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12960,6 +12992,32 @@ SELECT PossibleCourseID, CourseID, InstructorID, TimeOffered, DateOffered, RoomI
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual CourseSchedulerDBDataSet.PossibleCoursesDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            CourseSchedulerDBDataSet.PossibleCoursesDataTable dataTable = new CourseSchedulerDBDataSet.PossibleCoursesDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillBy(CourseSchedulerDBDataSet.PossibleCoursesDataTable dataTable, int InIDs) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(InIDs));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual CourseSchedulerDBDataSet.PossibleCoursesDataTable GetAllPossibleCourses(int InIDs) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(InIDs));
             CourseSchedulerDBDataSet.PossibleCoursesDataTable dataTable = new CourseSchedulerDBDataSet.PossibleCoursesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;

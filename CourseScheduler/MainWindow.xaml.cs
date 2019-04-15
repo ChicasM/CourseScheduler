@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -33,6 +34,8 @@ namespace CourseScheduler
         {
             dataBaseHandler.FillAdaptersWithDataSet();
             DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_StudentsTableAdapter.GetData();
+
+            GrdReport.ItemsSource = dataBaseHandler.NoRelation_SchedulesTableAdapter.GetData();
         }
 
         private void UpdateDatabase_Click(object sender, RoutedEventArgs e)
@@ -190,6 +193,39 @@ namespace CourseScheduler
             DbItemCreationWindow dbItemCreationWindow = new DbItemCreationWindow(GetDbTableItem(), dataBaseHandler);
             dbItemCreationWindow.ShowDialog();
             dataBaseHandler.TableAdapterManagerUpdateAll();
+        }
+
+        private void BtnBack_Click(object sender, RoutedEventArgs e)
+        {
+            grpControls.Visibility = Visibility.Hidden;
+
+            GrdReport.ItemsSource = dataBaseHandler.NoRelation_SchedulesTableAdapter.GetData();
+        }
+
+        private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            SwapToDetailed();
+            grpControls.Visibility = Visibility.Visible;
+        }
+
+        private void SwapToDetailed()
+        {
+            DataTable tbl;
+
+            tbl = dataBaseHandler.GetPossibleCourses(1);
+
+            List<int> ids = new List<int>();
+
+            foreach(DataRow row in tbl.Rows)
+            {
+                ids.Add(Convert.ToInt32(row[1]));
+            }
+
+            var results = from myRow in tbl.AsEnumerable()
+                          where ids.Contains(myRow.Field<int>("PossibleCourseID"))
+                          select myRow;
+
+            GrdReport.ItemsSource = results;
         }
     }
 }
