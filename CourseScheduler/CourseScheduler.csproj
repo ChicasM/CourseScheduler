@@ -78,6 +78,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Custom Controls\AddStudentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="DbItemCreationWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -100,6 +104,9 @@
     </Compile>
     <Compile Include="Custom Controls\AddCourseEnrollmentControl.xaml.cs">
       <DependentUpon>AddCourseEnrollmentControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Custom Controls\AddStudentControl.xaml.cs">
+      <DependentUpon>AddStudentControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataBaseHandler.cs" />
     <Compile Include="DbItemCreationWindow.xaml.cs">
@@ -170,10 +177,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="CourseSchedulerDB.mdf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="CourseSchedulerDB_log.ldf">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <DependentUpon>CourseSchedulerDB.mdf</DependentUpon>
     </Content>
   </ItemGroup>

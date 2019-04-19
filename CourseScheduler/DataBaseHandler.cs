@@ -161,9 +161,9 @@ namespace CourseScheduler
             DataSet.CourseEnrollments.AddCourseEnrollmentsRow(StudentRow, CourseRow, CreditType, CompletionStatus, Grade);
             CourseEnrollmentsTableAdapter.Update(DataSet.CourseEnrollments);
         }
-        public void InsertNewCourseCombination(CourseSchedulerDBDataSet.CombinationsRow Combination, CourseSchedulerDBDataSet.CoursesRow Course, int SubCombinationID)
+        public void InsertNewCourseCombination(CourseSchedulerDBDataSet.CourseCombinationsRow CourseCombination, CourseSchedulerDBDataSet.CoursesRow Course, int SubCombinationID)
         {
-            DataSet.CourseCombinations.AddCourseCombinationsRow(Combination, Course, SubCombinationID);
+            DataSet.CourseCombinations.AddCourseCombinationsRow(CourseCombination, Course, SubCombinationID);
             CourseCombinationsTableAdapter.Update(DataSet.CourseCombinations);
         }
         public void InsertNewInstructorPreference(CourseSchedulerDBDataSet.InstructorsRow Instructor, CourseSchedulerDBDataSet.CoursesRow Course, TimeSpan TimeOffered, DateTime DateOffered)
