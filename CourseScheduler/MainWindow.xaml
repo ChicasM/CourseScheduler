@@ -9,8 +9,12 @@
     <Window.Resources>
     </Window.Resources>
     <Grid Margin="0,0,0,0">
-        <TabControl HorizontalAlignment="Left" Margin="10,10,10,10" Width="auto" TabStripPlacement="Left">
-            <TabItem Header="Home" Height="30" Width="115">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1272*"/>
+            <ColumnDefinition Width="17*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl HorizontalAlignment="Left" Margin="10,10,0,10" Width="auto" TabStripPlacement="Left">
+            <TabItem Header="Home" Height="30" Width="115" Margin="-2,0,0,0" VerticalAlignment="Top">
                 <Grid Background="#FFE5E5E5" HorizontalAlignment="Left" Width="1263" Margin="0,0,-14,114">
                     <Label Content="Operator's Manual" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
                     <TextBlock HorizontalAlignment="Left" Margin="10,36,0,122" TextWrapping="Wrap" Width="1252"><Run Text="The &quot;Home&quot; Tab displays basic user functionality and how to help documentation."/><LineBreak/><Run Text="The &quot;Administrator View&quot; Tab displays tables and the ability to manually Create Update and Delete records in the database."/><LineBreak/><Run Text="____This can disrupt the natural flow of the application so use with caution."/><LineBreak/><Run Text="____If normal work flow is disrupted, you can recreate the database from the &quot;Load CSV&quot; tab."/><LineBreak/><Run Text="____Any changes made to the tables are stored within the application."/><LineBreak/><Run Text="____To save the changes press the &quot;Update Database&quot; button."/><LineBreak/><Run Text="The &quot;Load CSV&quot; tab loads a file provided by the University that will fill the database."/><LineBreak/><Run Text="The &quot;Reports&quot; tab provides a space to generate reports."/><LineBreak/><LineBreak/><LineBreak/><Run Text="DEVELOPER NOTES: remove when pushing to release."/><LineBreak/><Run Text="Further tabs can be added if needed."/><LineBreak/><Run Text="Copy the TabItem tab and then change the Header property."/></TextBlock>
@@ -44,8 +48,28 @@
                     <Label x:Name ="courses_Loaded" Content="Done"  HorizontalAlignment="Left" Margin="171,50,0,0" VerticalAlignment="Top" Width="448" Foreground="Black" Visibility ="hidden"/>
                 </Grid>
             </TabItem>
-            <TabItem Header="Reports" Height="30" Width="115">
-                <Grid Background="#FFE5E5E5"/>
+            <TabItem Header="Reports" Height="30" Width="115" IsSelected="True">
+                <Grid Background="#FFE5E5E5">
+                    <DataGrid x:Name="GrdReport" HorizontalAlignment="Center" Height="788" Margin="0,105,0,0" VerticalAlignment="Top" Width="990">
+                        <DataGrid.ItemContainerStyle>
+                            <Style TargetType="DataGridRow">
+                                <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                            </Style>
+                        </DataGrid.ItemContainerStyle>
+                    </DataGrid>
+                    <GroupBox x:Name="grpControls" Header="Controls" HorizontalAlignment="Left" Height="100" Margin="10,0,0,0" VerticalAlignment="Top" Width="970" Visibility="Hidden">
+                        <Grid HorizontalAlignment="Left" Height="80" Margin="10,10,-2,-12" VerticalAlignment="Top" Width="950">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="31*"/>
+                                <ColumnDefinition Width="920*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Button x:Name="btnShowOverview" Margin="10,10,823,16" Content="Show Overview" Grid.ColumnSpan="2"/>
+                            <Button x:Name="btnShowWeekly" Content="Show Weekly" HorizontalAlignment="Left" Margin="121.5,10,0,0" VerticalAlignment="Top" Width="112" Height="54" Grid.Column="1"/>
+                            <Button x:Name="btnBack" Content="&lt; Back" HorizontalAlignment="Left" Margin="815.5,42,0,0" VerticalAlignment="Top" Width="94" Height="27" Click="BtnBack_Click" Grid.Column="1"/>
+                        </Grid>
+                    </GroupBox>
+                </Grid>
             </TabItem>
             <TabItem Header="TabItem" Height="30" Width="115">
                 <Grid Background="#FFE5E5E5"/>

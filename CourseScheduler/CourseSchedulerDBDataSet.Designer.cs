@@ -10,6 +10,8 @@
 
 #pragma warning disable 1591
 
+using System;
+
 namespace CourseScheduler {
     
     
@@ -1554,7 +1556,7 @@ namespace CourseScheduler {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
-            public void AddCourseCombinationsRow(CourseCombinationsRow row) {
+            public void AddCourseCombinationsRow(CombinationsRow combination, CoursesRow course, CourseCombinationsRow row) {
                 this.Rows.Add(row);
             }
             
@@ -1738,6 +1740,11 @@ namespace CourseScheduler {
                 }
                 xs.Add(dsSchema);
                 return type;
+            }
+
+            internal void AddCourseCombinationsRow(CombinationsRow combination, CoursesRow course, int subCombinationID)
+            {
+                throw new NotImplementedException();
             }
         }
         
@@ -12616,11 +12623,17 @@ SELECT ScheduleID, PossibleCourseID FROM Join_Schedules_PossibleCourses WHERE (P
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT ScheduleID, PossibleCourseID FROM dbo.Join_Schedules_PossibleCourses";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT        PossibleCourseID\r\nFROM            Join_Schedules_PossibleCourses\r\nW" +
+                "HERE        (ScheduleID = @ID)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@ID", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "ScheduleID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12642,6 +12655,18 @@ SELECT ScheduleID, PossibleCourseID FROM Join_Schedules_PossibleCourses WHERE (P
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual CourseSchedulerDBDataSet.Join_Schedules_PossibleCoursesDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            CourseSchedulerDBDataSet.Join_Schedules_PossibleCoursesDataTable dataTable = new CourseSchedulerDBDataSet.Join_Schedules_PossibleCoursesDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual CourseSchedulerDBDataSet.Join_Schedules_PossibleCoursesDataTable GetPossibleCourses(int ID) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(ID));
             CourseSchedulerDBDataSet.Join_Schedules_PossibleCoursesDataTable dataTable = new CourseSchedulerDBDataSet.Join_Schedules_PossibleCoursesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
@@ -12933,12 +12958,19 @@ SELECT PossibleCourseID, CourseID, InstructorID, TimeOffered, DateOffered, RoomI
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
         private void InitCommandCollection() {
-            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[1];
+            this._commandCollection = new global::System.Data.SqlClient.SqlCommand[2];
             this._commandCollection[0] = new global::System.Data.SqlClient.SqlCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT PossibleCourseID, CourseID, InstructorID, TimeOffered, DateOffered, RoomID" +
                 " FROM dbo.PossibleCourses";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1] = new global::System.Data.SqlClient.SqlCommand();
+            this._commandCollection[1].Connection = this.Connection;
+            this._commandCollection[1].CommandText = "SELECT        PossibleCourseID, CourseID, InstructorID, TimeOffered, DateOffered," +
+                " RoomID\r\nFROM            PossibleCourses\r\nWHERE        (PossibleCourseID = @InID" +
+                "s)";
+            this._commandCollection[1].CommandType = global::System.Data.CommandType.Text;
+            this._commandCollection[1].Parameters.Add(new global::System.Data.SqlClient.SqlParameter("@InIDs", global::System.Data.SqlDbType.Int, 4, global::System.Data.ParameterDirection.Input, 0, 0, "PossibleCourseID", global::System.Data.DataRowVersion.Current, false, null, "", "", ""));
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -12960,6 +12992,32 @@ SELECT PossibleCourseID, CourseID, InstructorID, TimeOffered, DateOffered, RoomI
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
         public virtual CourseSchedulerDBDataSet.PossibleCoursesDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
+            CourseSchedulerDBDataSet.PossibleCoursesDataTable dataTable = new CourseSchedulerDBDataSet.PossibleCoursesDataTable();
+            this.Adapter.Fill(dataTable);
+            return dataTable;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, false)]
+        public virtual int FillBy(CourseSchedulerDBDataSet.PossibleCoursesDataTable dataTable, int InIDs) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(InIDs));
+            if ((this.ClearBeforeFill == true)) {
+                dataTable.Clear();
+            }
+            int returnValue = this.Adapter.Fill(dataTable);
+            return returnValue;
+        }
+        
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "15.0.0.0")]
+        [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
+        [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, false)]
+        public virtual CourseSchedulerDBDataSet.PossibleCoursesDataTable GetAllPossibleCourses(int InIDs) {
+            this.Adapter.SelectCommand = this.CommandCollection[1];
+            this.Adapter.SelectCommand.Parameters[0].Value = ((int)(InIDs));
             CourseSchedulerDBDataSet.PossibleCoursesDataTable dataTable = new CourseSchedulerDBDataSet.PossibleCoursesDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
