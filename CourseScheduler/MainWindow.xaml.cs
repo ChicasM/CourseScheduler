@@ -99,7 +99,10 @@ namespace CourseScheduler
                     {
                         var line = reader.ReadLine();
                         var values = line.Split(',');
-                        dataBaseHandler.InsertNewCourse(values[1], Convert.ToInt32(values[2]), Convert.ToBoolean(Convert.ToInt32(values[3])), Convert.ToBoolean(Convert.ToInt32(values[4])), Convert.ToBoolean(Convert.ToInt32(values[5])), Convert.ToBoolean(Convert.ToInt32(values[6])), values[7], Convert.ToInt32(values[8]));
+                        // String, Int, Bool, Bool, Bool, Bool, String, Int
+                        dataBaseHandler.InsertNewCourse(values[0], Convert.ToInt32(values[1]), Convert.ToBoolean(Convert.ToInt32(values[2])),
+                                                        Convert.ToBoolean(Convert.ToInt32(values[3])), Convert.ToBoolean(Convert.ToInt32(values[4])),
+                                                        Convert.ToBoolean(Convert.ToInt32(values[5])), values[6], Convert.ToInt32(values[7]));
                     }
                 }
 
@@ -109,9 +112,8 @@ namespace CourseScheduler
                     {
                         var line = reader.ReadLine();
                         var values = line.Split(',');
-                        dataBaseHandler.InsertNewInstructor(values[1]);
+                        dataBaseHandler.InsertNewInstructor(values[0]);
                     }
-
                 }
 
                 if (fileLocation.Contains("Students"))
@@ -120,7 +122,7 @@ namespace CourseScheduler
                     {
                         var line = reader.ReadLine();
                         var values = line.Split(',');
-                        //dataBaseHandler.InsertNewStudent(Convert.ToInt32(values[0]), Convert.ToInt32(values[1]), Convert.ToInt32(values[2]), values[3], Convert.ToInt32(values[4]));
+                        dataBaseHandler.InsertNewStudent(values[0], values[1], values[2], values[3], Convert.ToInt32(values[4]));
                     }
                 }
 
@@ -130,7 +132,7 @@ namespace CourseScheduler
                     {
                         var line = reader.ReadLine();
                         var values = line.Split(',');
-                        dataBaseHandler.InsertNewRoom(values[1], Convert.ToBoolean(Convert.ToInt32(values[2])), Convert.ToBoolean(Convert.ToInt32(values[3])));
+                        dataBaseHandler.InsertNewRoom(values[0], Convert.ToBoolean(Convert.ToInt32(values[1])), Convert.ToBoolean(Convert.ToInt32(values[2])));
                     }
                 }
             }
@@ -192,7 +194,7 @@ namespace CourseScheduler
         {
             DbItemCreationWindow dbItemCreationWindow = new DbItemCreationWindow(GetDbTableItem(), dataBaseHandler);
             dbItemCreationWindow.ShowDialog();
-            dataBaseHandler.TableAdapterManagerUpdateAll();
+            UpdateTable();
         }
 
         private void BtnBack_Click(object sender, RoutedEventArgs e)

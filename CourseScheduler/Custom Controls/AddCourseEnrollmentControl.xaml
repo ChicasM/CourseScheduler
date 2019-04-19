@@ -5,8 +5,24 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CourseScheduler.Custom_Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="250" d:DesignWidth="350">
+    <UserControl.Resources>
+        <CollectionViewSource x:Key="studentsViewSource" Source="{Binding Students, Source={StaticResource courseSchedulerDBDataSet}}"/>
+        <CollectionViewSource x:Key="coursesViewSource" Source="{Binding Courses, Source={StaticResource courseSchedulerDBDataSet}}"/>
+    </UserControl.Resources>
     <Grid>
-            
+        <Label Content="Add New Course Enrollment" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <Label Content="Select Student" HorizontalAlignment="Left" Margin="40,49,0,0" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Left" Margin="131,49,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="Name" ItemsSource="{Binding Source={StaticResource studentsViewSource}}" SelectionChanged="ComboBox_SelectionChanged"/>
+        <Label Content="Select Course" HorizontalAlignment="Left" Margin="40,80,0,0" VerticalAlignment="Top"/>
+        <ComboBox HorizontalAlignment="Left" Margin="131,80,0,0" VerticalAlignment="Top" Width="120" DisplayMemberPath="Name" ItemsSource="{Binding Source={StaticResource coursesViewSource}}" SelectionChanged="ComboBox_SelectionChanged_1"/>
+        <Label Content="Credit Type" HorizontalAlignment="Left" Margin="52,111,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="CreditType" HorizontalAlignment="Left" Height="23" Margin="131,111,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Completion Status" HorizontalAlignment="Left" Margin="15,139,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="CompletionStatus" HorizontalAlignment="Left" Height="23" Margin="131,139,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Grade" HorizontalAlignment="Left" Margin="77,167,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Grade" HorizontalAlignment="Left" Height="23" Margin="131,167,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="CreateEnrollment" Content="Create" HorizontalAlignment="Left" Margin="144,220,0,0" VerticalAlignment="Top" Width="75" Click="CreateEnrollment_Click"/>
+
     </Grid>
 </UserControl>

@@ -5,21 +5,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:CourseScheduler.Custom_Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="350">
+             d:DesignHeight="350" d:DesignWidth="350">
     <Grid>
         <Label Content="Add New Course" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <Label Content="Course Name" HorizontalAlignment="Left" Margin="10,85,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="CourseName" HorizontalAlignment="Left" Height="23" Margin="114,89,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Course Name" HorizontalAlignment="Left" Margin="10,131,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="Credits" HorizontalAlignment="Left" Height="23" Margin="114,135,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <CheckBox x:Name="NeedLabRoom" Content="NeedsLabRoom" HorizontalAlignment="Left" Margin="130,182,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="NeedsLargeRoom" Content="NeedsLargeRoom" HorizontalAlignment="Left" Margin="130,214,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="IsElective" Content="IsElective" HorizontalAlignment="Left" Margin="130,250,0,0" VerticalAlignment="Top"/>
-        <CheckBox x:Name="HasPrerequisite" Content="HasPrerequisite" HorizontalAlignment="Left" Margin="130,282,0,0" VerticalAlignment="Top"/>
-        <Label Content="Major" HorizontalAlignment="Left" Margin="10,315,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="Major" HorizontalAlignment="Left" Height="23" Margin="114,319,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Capacity" HorizontalAlignment="Left" Margin="10,361,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="Capacity" HorizontalAlignment="Left" Height="23" Margin="114,365,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Course Name" HorizontalAlignment="Left" Margin="30,60,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="CourseName" HorizontalAlignment="Left" Height="23" Margin="117,60,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Credits" HorizontalAlignment="Left" Margin="65,87,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Credits" HorizontalAlignment="Left" Height="23" Margin="117,88,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120" RenderTransformOrigin="0.421,-0.455"/>
+        <CheckBox x:Name="NeedsLabRoom" Content="NeedsLabRoom" HorizontalAlignment="Left" Margin="117,116,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="NeedsLargeRoom" Content="NeedsLargeRoom" HorizontalAlignment="Left" Margin="117,136,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="IsElective" Content="IsElective" HorizontalAlignment="Left" Margin="117,156,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="HasPrerequisite" Content="HasPrerequisite" HorizontalAlignment="Left" Margin="117,176,0,0" VerticalAlignment="Top"/>
+        <Label Content="Major" HorizontalAlignment="Left" Margin="71,196,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Major" HorizontalAlignment="Left" Height="23" Margin="117,196,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Capacity" HorizontalAlignment="Left" Margin="57,224,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="Capacity" HorizontalAlignment="Left" Height="23" Margin="117,224,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="CreateCourse" Content="Create" HorizontalAlignment="Left" Margin="117,286,0,0" VerticalAlignment="Top" Width="75" Click="CreateCourse_Click"/>
 
     </Grid>
 </UserControl>
