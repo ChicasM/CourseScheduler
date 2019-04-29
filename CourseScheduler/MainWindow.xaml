@@ -49,8 +49,8 @@
                 </Grid>
             </TabItem>
             <TabItem Header="Reports" Height="30" Width="115" IsSelected="True">
-                <Grid Background="#FFE5E5E5">
-                    <DataGrid x:Name="GrdReport" HorizontalAlignment="Center" Height="788" Margin="0,105,0,0" VerticalAlignment="Top" Width="990">
+                <Grid Background="#FF973232">
+                    <DataGrid x:Name="GrdReport" HorizontalAlignment="Center" Height="788" Margin="0,105,0,0" VerticalAlignment="Top" Width="990" Background="#FFCFC080">
                         <DataGrid.ItemContainerStyle>
                             <Style TargetType="DataGridRow">
                                 <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
@@ -64,8 +64,6 @@
                                 <ColumnDefinition Width="920*"/>
                             </Grid.ColumnDefinitions>
 
-                            <Button x:Name="btnShowOverview" Margin="10,10,823,16" Content="Show Overview" Grid.ColumnSpan="2"/>
-                            <Button x:Name="btnShowWeekly" Content="Show Weekly" HorizontalAlignment="Left" Margin="121.5,10,0,0" VerticalAlignment="Top" Width="112" Height="54" Grid.Column="1"/>
                             <Button x:Name="btnBack" Content="&lt; Back" HorizontalAlignment="Left" Margin="815.5,42,0,0" VerticalAlignment="Top" Width="94" Height="27" Click="BtnBack_Click" Grid.Column="1"/>
                         </Grid>
                     </GroupBox>
