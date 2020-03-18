@@ -99,9 +99,7 @@ namespace CourseScheduler
                     {
                         var values = reader.ReadLine().Split(',');
                         // String, Int, Bool, Bool, Bool, Bool, String, Int
-                        dataBaseHandler.InsertNewCourse(values[0], Convert.ToInt32(values[1]), Convert.ToBoolean(Convert.ToInt32(values[2])),
-                                                        Convert.ToBoolean(Convert.ToInt32(values[3])), Convert.ToBoolean(Convert.ToInt32(values[4])),
-                                                        Convert.ToBoolean(Convert.ToInt32(values[5])), values[6], Convert.ToInt32(values[7]));
+                        insertNewCourse(values);
                     }
                 }
 
@@ -132,6 +130,13 @@ namespace CourseScheduler
                     }
                 }
             }
+        }
+
+        private void insertNewCourse(string[] values)
+        {
+            dataBaseHandler.InsertNewCourse(values[0], Convert.ToInt32(values[1]), Convert.ToBoolean(Convert.ToInt32(values[2])),
+                                                                    Convert.ToBoolean(Convert.ToInt32(values[3])), Convert.ToBoolean(Convert.ToInt32(values[4])),
+                                                                    Convert.ToBoolean(Convert.ToInt32(values[5])), values[6], Convert.ToInt32(values[7]));
         }
 
         private string GetDbTableItem()
