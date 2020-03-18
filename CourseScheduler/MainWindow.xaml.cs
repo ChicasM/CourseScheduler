@@ -97,8 +97,7 @@ namespace CourseScheduler
                 {
                     while (!reader.EndOfStream)
                     {
-                        var line = reader.ReadLine();
-                        var values = line.Split(',');
+                        var values = reader.ReadLine().Split(',');
                         // String, Int, Bool, Bool, Bool, Bool, String, Int
                         dataBaseHandler.InsertNewCourse(values[0], Convert.ToInt32(values[1]), Convert.ToBoolean(Convert.ToInt32(values[2])),
                                                         Convert.ToBoolean(Convert.ToInt32(values[3])), Convert.ToBoolean(Convert.ToInt32(values[4])),
@@ -110,8 +109,7 @@ namespace CourseScheduler
                 {
                     while (!reader.EndOfStream)
                     {
-                        var line = reader.ReadLine();
-                        var values = line.Split(',');
+                        var values = reader.ReadLine().Split(',');
                         dataBaseHandler.InsertNewInstructor(values[0]);
                     }
                 }
@@ -120,8 +118,7 @@ namespace CourseScheduler
                 {
                     while (!reader.EndOfStream)
                     {
-                        var line = reader.ReadLine();
-                        var values = line.Split(',');
+                        var values = reader.ReadLine().Split(',');
                         dataBaseHandler.InsertNewStudent(values[0], values[1], values[2], values[3], Convert.ToInt32(values[4]));
                     }
                 }
@@ -130,8 +127,7 @@ namespace CourseScheduler
                 {
                     while (!reader.EndOfStream)
                     {
-                        var line = reader.ReadLine();
-                        var values = line.Split(',');
+                        var values = reader.ReadLine().Split(',');
                         dataBaseHandler.InsertNewRoom(values[0], Convert.ToBoolean(Convert.ToInt32(values[1])), Convert.ToBoolean(Convert.ToInt32(values[2])));
                     }
                 }
