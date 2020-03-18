@@ -27,22 +27,22 @@ namespace CourseScheduler
         public MainWindow()
         {
             InitializeComponent();
-            dataBaseHandler = new DataBaseHandler();
+            DataBaseHandler = new DataBaseHandler();
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            dataBaseHandler.FillAdaptersWithDataSet();
-            DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_StudentsTableAdapter.GetData();
+            DataBaseHandler.FillAdaptersWithDataSet();
+            DataGrid_DbTable.ItemsSource = DataBaseHandler.NoRelation_StudentsTableAdapter.GetData();
 
-            GrdReport.ItemsSource = dataBaseHandler.NoRelation_SchedulesTableAdapter.GetData();
+            GrdReport.ItemsSource = DataBaseHandler.NoRelation_SchedulesTableAdapter.GetData();
         }
 
         private void UpdateDatabase_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                dataBaseHandler.FillAdaptersWithDataSet();
+                DataBaseHandler.FillAdaptersWithDataSet();
                 MessageBox.Show("Database Updated", "Update", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch (Exception ex)
@@ -108,7 +108,7 @@ namespace CourseScheduler
                     while (!reader.EndOfStream)
                     {
                         var values = reader.ReadLine().Split(',');
-                        dataBaseHandler.InsertNewInstructor(values[0]);
+                        DataBaseHandler.InsertNewInstructor(values[0]);
                     }
                 }
 
@@ -117,7 +117,7 @@ namespace CourseScheduler
                     while (!reader.EndOfStream)
                     {
                         var values = reader.ReadLine().Split(',');
-                        dataBaseHandler.InsertNewStudent(values[0], values[1], values[2], values[3], Convert.ToInt32(values[4]));
+                        DataBaseHandler.InsertNewStudent(values[0], values[1], values[2], values[3], Convert.ToInt32(values[4]));
                     }
                 }
 
@@ -126,7 +126,7 @@ namespace CourseScheduler
                     while (!reader.EndOfStream)
                     {
                         var values = reader.ReadLine().Split(',');
-                        dataBaseHandler.InsertNewRoom(values[0], Convert.ToBoolean(Convert.ToInt32(values[1])), Convert.ToBoolean(Convert.ToInt32(values[2])));
+                        DataBaseHandler.InsertNewRoom(values[0], Convert.ToBoolean(Convert.ToInt32(values[1])), Convert.ToBoolean(Convert.ToInt32(values[2])));
                     }
                 }
             }
@@ -134,49 +134,51 @@ namespace CourseScheduler
 
         private void insertNewCourse(string[] values)
         {
-            dataBaseHandler.InsertNewCourse(values[0], Convert.ToInt32(values[1]), Convert.ToBoolean(Convert.ToInt32(values[2])),
+            DataBaseHandler.InsertNewCourse(values[0], Convert.ToInt32(values[1]), Convert.ToBoolean(Convert.ToInt32(values[2])),
                                                                     Convert.ToBoolean(Convert.ToInt32(values[3])), Convert.ToBoolean(Convert.ToInt32(values[4])),
                                                                     Convert.ToBoolean(Convert.ToInt32(values[5])), values[6], Convert.ToInt32(values[7]));
         }
 
         private string DbTableItem => TableSelector.SelectionBoxItem.ToString();
 
+        public DataBaseHandler DataBaseHandler { get => dataBaseHandler; set => dataBaseHandler = value; }
+
         private void UpdateTable()
         {
             switch (DbTableItem)
             {
                 case "Combinations":
-                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_CombinationsTableAdapter.GetData();
+                    DataGrid_DbTable.ItemsSource = DataBaseHandler.NoRelation_CombinationsTableAdapter.GetData();
                     break;
                 case "CourseCombinations":
-                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_CourseCombinationsTableAdapter.GetData();
+                    DataGrid_DbTable.ItemsSource = DataBaseHandler.NoRelation_CourseCombinationsTableAdapter.GetData();
                     break;
                 case "CourseEnrollments":
-                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_CourseEnrollmentsTableAdapter.GetData();
+                    DataGrid_DbTable.ItemsSource = DataBaseHandler.NoRelation_CourseEnrollmentsTableAdapter.GetData();
                     break;
                 case "Courses":
-                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_CoursesTableAdapter.GetData();
+                    DataGrid_DbTable.ItemsSource = DataBaseHandler.NoRelation_CoursesTableAdapter.GetData();
                     break;
                 case "InstructorPreferences":
-                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_InstructorPreferencesTableAdapter.GetData();
+                    DataGrid_DbTable.ItemsSource = DataBaseHandler.NoRelation_InstructorPreferencesTableAdapter.GetData();
                     break;
                 case "Instructors":
-                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_InstructorsTableAdapter.GetData();
+                    DataGrid_DbTable.ItemsSource = DataBaseHandler.NoRelation_InstructorsTableAdapter.GetData();
                     break;
                 case "Join_Schedules_PossibleCourses":
-                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_Join_Schedules_PossibleCoursesTableAdapter.GetData();
+                    DataGrid_DbTable.ItemsSource = DataBaseHandler.NoRelation_Join_Schedules_PossibleCoursesTableAdapter.GetData();
                     break;
                 case "PossibleCourses":
-                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_PossibleCoursesTableAdapter.GetData();
+                    DataGrid_DbTable.ItemsSource = DataBaseHandler.NoRelation_PossibleCoursesTableAdapter.GetData();
                     break;
                 case "Rooms":
-                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_RoomsTableAdapter.GetData();
+                    DataGrid_DbTable.ItemsSource = DataBaseHandler.NoRelation_RoomsTableAdapter.GetData();
                     break;
                 case "Schedules":
-                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_SchedulesTableAdapter.GetData();
+                    DataGrid_DbTable.ItemsSource = DataBaseHandler.NoRelation_SchedulesTableAdapter.GetData();
                     break;
                 case "Students":
-                    DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_StudentsTableAdapter.GetData();
+                    DataGrid_DbTable.ItemsSource = DataBaseHandler.NoRelation_StudentsTableAdapter.GetData();
                     break;
                 default:
                     break;
@@ -190,7 +192,7 @@ namespace CourseScheduler
 
         private void AddNewItem_Click(object sender, RoutedEventArgs e)
         {
-            DbItemCreationWindow dbItemCreationWindow = new DbItemCreationWindow(DbTableItem, dataBaseHandler);
+            DbItemCreationWindow dbItemCreationWindow = new DbItemCreationWindow(DbTableItem, DataBaseHandler);
             dbItemCreationWindow.ShowDialog();
             UpdateTable();
         }
@@ -199,7 +201,7 @@ namespace CourseScheduler
         {
             grpControls.Visibility = Visibility.Hidden;
 
-            GrdReport.ItemsSource = dataBaseHandler.NoRelation_SchedulesTableAdapter.GetData();
+            GrdReport.ItemsSource = DataBaseHandler.NoRelation_SchedulesTableAdapter.GetData();
         }
 
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
@@ -212,7 +214,7 @@ namespace CourseScheduler
         {
             DataTable tbl;
 
-            tbl = dataBaseHandler.GetPossibleCourses(1);
+            tbl = DataBaseHandler.GetPossibleCourses(1);
 
             List<int> ids = new List<int>();
 
