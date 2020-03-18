@@ -99,6 +99,7 @@ namespace CourseScheduler
                         var values = reader.ReadLine().Split(',');
                         // String, Int, Bool, Bool, Bool, Bool, String, Int
                         insertNewCourse(values);
+
                     }
                 }
 
@@ -138,14 +139,11 @@ namespace CourseScheduler
                                                                     Convert.ToBoolean(Convert.ToInt32(values[5])), values[6], Convert.ToInt32(values[7]));
         }
 
-        private string GetDbTableItem()
-        {
-            return TableSelector.SelectionBoxItem.ToString();
-        }
+        private string DbTableItem => TableSelector.SelectionBoxItem.ToString();
 
         private void UpdateTable()
         {
-            switch (GetDbTableItem())
+            switch (DbTableItem)
             {
                 case "Combinations":
                     DataGrid_DbTable.ItemsSource = dataBaseHandler.NoRelation_CombinationsTableAdapter.GetData();
@@ -192,7 +190,7 @@ namespace CourseScheduler
 
         private void AddNewItem_Click(object sender, RoutedEventArgs e)
         {
-            DbItemCreationWindow dbItemCreationWindow = new DbItemCreationWindow(GetDbTableItem(), dataBaseHandler);
+            DbItemCreationWindow dbItemCreationWindow = new DbItemCreationWindow(DbTableItem, dataBaseHandler);
             dbItemCreationWindow.ShowDialog();
             UpdateTable();
         }

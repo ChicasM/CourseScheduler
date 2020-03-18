@@ -128,6 +128,7 @@
     <Compile Include="Custom Controls\AddCombinationsControl.xaml.cs">
       <DependentUpon>AddCombinationsControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Methods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
