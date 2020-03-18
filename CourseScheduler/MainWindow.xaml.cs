@@ -81,9 +81,8 @@ namespace CourseScheduler
             if (result == true)
             {
                 // Open document 
-                string filename = dlg.FileName;
-                Read_CSV(filename);
-                return filename;
+                Read_CSV(dlg.FileName);
+                return dlg.FileName;
             }
             return "File Location";
         }
